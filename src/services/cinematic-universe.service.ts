@@ -42,7 +42,7 @@ const updateOne = async (
 
   if (updateCinematicUniverse) {
     updateCinematicUniverse.name = data.name;
-    dataSource.manager.save(updateCinematicUniverse);
+    await dataSource.manager.save(updateCinematicUniverse);
     return cinematicUniverseToDto(updateCinematicUniverse);
   } else {
     return null;
@@ -66,4 +66,18 @@ const isNameExist = async (name: string): Promise<boolean> => {
   });
 };
 
-export default { getAll, getOne, createOne, updateOne, deleteOne, isNameExist };
+const isIdExist = async (id: number): Promise<boolean> => {
+  return await dataSource.manager.exists(CinematicUniverse, {
+    where: { id },
+  });
+};
+
+export default {
+  getAll,
+  getOne,
+  createOne,
+  updateOne,
+  deleteOne,
+  isNameExist,
+  isIdExist,
+};

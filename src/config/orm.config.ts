@@ -9,6 +9,7 @@ const dataSourceOptions: DataSourceOptions = {
   password: "changeme",
   database: "node_js_spaceships_api",
   synchronize: true,
+  dropSchema: false,
   entities: ["src/entities/**/*.ts"],
 };
 
@@ -18,6 +19,7 @@ export const initDataSource = async () => {
   await createDatabase({
     ifNotExist: true,
     options: dataSourceOptions,
+    synchronize: true,
   });
   await dataSource.initialize();
 };
